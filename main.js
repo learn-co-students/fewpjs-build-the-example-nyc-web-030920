@@ -4,6 +4,7 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 const errorModal = document.getElementById('modal') // Error Node
+errorModal.className = 'hidden'
 const heartBtn = document.querySelectorAll('span.like-glyph') //heart buttons span elements
 
 let glyphStates = {
@@ -31,12 +32,13 @@ function callback(e){
   let heart = e.target
   mimicServerCall()
   .then(message => { // DO THIS WHEN PROMISE IS FULFILLED 
-    heart.innerText = glyphStates[heart.innerText]
-    heart.style.color = colorStates[heart.style.color]
+    heart.innerText = glyphStates[heart.innerText] // just switch current to new text/html
+    heart.style.color = colorStates[heart.style.color] // just switch current to new color
     console.log('Promise Fulfilled')
   })
   .catch(message => { // DO THIS WHEN PROMISE IS REJECTED 
     errorModal.hidden = false 
+    console.log("Promise Rejected")
     setTimeout(function(){
       errorModal.hidden = true
     },5000)
